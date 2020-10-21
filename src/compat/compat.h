@@ -872,7 +872,7 @@ static inline void skb_mark_not_on_list(struct sk_buff *skb)
 #endif
 #endif
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0)
+#if !defined(USE_WOLFCRYPT) && (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0))
 #define blake2s_init zinc_blake2s_init
 #define blake2s_init_key zinc_blake2s_init_key
 #define blake2s_update zinc_blake2s_update

@@ -25,6 +25,9 @@
 #include <net/rtnetlink.h>
 #include <net/ip_tunnels.h>
 #include <net/addrconf.h>
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 4, 10)
+#include <net/gso.h>
+#endif
 
 static LIST_HEAD(device_list);
 
@@ -232,6 +235,15 @@ err:
 	kfree_skb(skb);
 	return ret;
 }
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 11, 0)
+static void ip_tunnel_get_stats64(struct net_device *dev,
+			   struct rtnl_link_stats64 *tot)
+{
+	netdev_stats_to_stats64(tot, &dev->stats);
+	dev_fetch_sw_netstats(tot, dev->tstats);
+}
+#endif
 
 static const struct net_device_ops netdev_ops = {
 	.ndo_open		= wg_open,

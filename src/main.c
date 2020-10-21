@@ -10,7 +10,7 @@
 #include "ratelimiter.h"
 #include "netlink.h"
 
-#include <uapi/linux/wireguard.h>
+#include <uapi/wireguard.h>
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -76,3 +76,7 @@ MODULE_AUTHOR("Jason A. Donenfeld <Jason@zx2c4.com>");
 MODULE_VERSION(WIREGUARD_VERSION);
 MODULE_ALIAS_RTNL_LINK(KBUILD_MODNAME);
 MODULE_ALIAS_GENL_FAMILY(WG_GENL_NAME);
+
+#if defined(WOLFCRYPTO_SHIM_H) && defined(MODULE_IMPORT_NS)
+MODULE_IMPORT_NS(WOLFSSL);
+#endif
