@@ -14,11 +14,11 @@ modules.order
 modules.builtin
 maint/
 qemu-build/
-src/tests/qemu/distfiles/
+tests/qemu/distfiles/
 *.id0
 *.id1
 *.id2
 *.nam
 *.til
 .cache.mk
-src/crypto/zinc/*/*.S
+crypto/zinc/*/*.S
